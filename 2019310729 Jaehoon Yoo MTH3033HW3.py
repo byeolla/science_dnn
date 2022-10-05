@@ -21,10 +21,10 @@ f4 = lambda x : (-96*x**4+96*(1+x**2)*x**2-12*(1+x**2)**2)/(1+x**2)**4  ## f^(4)
 g = lambda x: np.log(1+x**2) ## Integrand
 exact = np.pi/2 - 2 + np.log(2)  #exact value 
 error = 1e-8 ## error 
-K4 = f4(np.linspace(0, 1, 10000)).max()        ############## maximum을 explicit하게 구할 수는 없어서 maximum을 활용하였습니다.
+K4 = np.abs(f4(np.linspace(0, 1, 10000))).max()    
 
 least = int(((error**(-1))*K4/180)**0.25)  #### 필요한 N수
-
+print(least)
 approx = simps(g, 0, 1, least)   ## least 만큼 돌렸을 때의 approximation
 err = np.abs(approx - exact)   ## err 계산
 print("estimiation with {error} is {value}".format(error = error, value = err < error))
